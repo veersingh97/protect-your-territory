@@ -171,7 +171,7 @@ function createEnemies() {
 
     const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
 
-    const speedMultiplier = score > 1000 ? 2 : 1;
+    const speedMultiplier = score > 10000 ? 2 : 1;
     const velocity = {
       x: Math.cos(angle) * speedMultiplier,
       y: Math.sin(angle) * speedMultiplier,
