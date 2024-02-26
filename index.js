@@ -8,7 +8,7 @@ const song = document.getElementById("theme-song");
 const endGameSound = document.getElementById("end-game-sound");
 const volumeHighBtn = document.getElementById("volume-high-btn");
 const muteBtn = document.getElementById("mute-btn");
-
+song.loop = true;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -154,6 +154,7 @@ function init() {
   muteBtn.style.display = "none";
 }
 
+let score = 0;
 function createEnemies() {
   enemiesTimer = setInterval(() => {
     const radius = Math.random() * (35 - 12) + 12;
@@ -170,16 +171,17 @@ function createEnemies() {
 
     const angle = Math.atan2(canvas.height / 2 - y, canvas.width / 2 - x);
 
+    const speedMultiplier = score > 1000 ? 2 : 1;
     const velocity = {
-      x: Math.cos(angle),
-      y: Math.sin(angle),
+      x: Math.cos(angle) * speedMultiplier,
+      y: Math.sin(angle) * speedMultiplier,
     };
     enemies.push(new Enemy(x, y, radius, color, velocity));
   }, 1000);
 }
 
 let animationId;
-let score = 0;
+
 function animate() {
   animationId = window.requestAnimationFrame(animate);
   ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
